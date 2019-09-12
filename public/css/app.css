@@ -1,0 +1,21 @@
+.chosen-select {
+  display: block !important;
+  height: 0;
+  width: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.solution {
+  background: black;
+  color: white;
+  padding: 20px;
+}
+.input-group-text {
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-align: justify;
+}
