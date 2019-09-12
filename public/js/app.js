@@ -96,7 +96,8 @@ app.controller('myCtrl', function ($scope, $http) {
         problems.forEach(o => {
             let flag = true;
             for (let key in filterFields) {
-                if (filterFields[key].length && filterFields[key].indexOf(o[key])) {
+                let findOn = filterFields[key];
+                if (findOn.length && o[key].toLowerCase().search(findOn.toLowerCase()) < 0) {
                     flag = false;
                     break;
                 }
