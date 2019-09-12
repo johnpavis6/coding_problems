@@ -58,8 +58,10 @@ app.controller('myCtrl', function ($scope, $http) {
         if (!confirm("Are you sure?")) return;
         $http(getSettings("DELETE", _id)).then(function (resp) {
             for (let i = 0; i < $scope.problems.length; i++) {
-                if ($scope.problems[i]._id == $scope.payload._id) {
+                if ($scope.problems[i]._id == _id) {
                     $scope.problems.splice(i, 1);
+                    // $scope.problems = $scope.problems;
+                    break;
                 }
             }
             PNotify.success("Deleted successfully");
