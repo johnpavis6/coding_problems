@@ -6,19 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Coding Problems</title>
+    <!--Icon-->
     <link rel="shortcut icon" href="public/images/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <!--Jquery-->
+    <script src="public/jquery/jquery.min.js"></script>
+    <!--Chosen-->
     <link rel="stylesheet" href="public/chosen/chosen.min.css">
-    <link rel="stylesheet" href="public/css/app.css">
-    <script src="public/js/jquery.min.js"></script>
-    <script src="public/js/all.js"></script>
-    <script src="public/js/angular.min.js"></script>
-    <script src="public/js/bootstrap.min.js"></script>
     <script src="public/chosen/chosen.jquery.min.js"></script>
-    <script type="text/javascript" src="public/js/PNotify.js"></script>
-    <script type="text/javascript" src="public/js/PNotifyButtons.js"></script>
-    <meta access="all" content="a2ed7249fbb2c461fb4e03bc3ce917c1a4a32" />
-    <meta access="get" content="5d79f19abdaac80423d2c72d" />
+    <!--Fontawesome-->
+    <script src="public/fontawesome/all.js"></script>
+    <!--Angular-->
+    <script src="public/angular/angular.min.js"></script>
+    <!-- <script src="public/angular/angular-animate.min.js"></script> -->
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="public/bootstrap/bootstrap.min.css">
+    <script src="public/bootstrap/bootstrap.min.js"></script>
+    <!--PNotify-->
+    <script type="text/javascript" src="public/pnotify/PNotify.js"></script>
+    <script type="text/javascript" src="public/pnotify/PNotifyButtons.js"></script>
+    <!--custom css-->
+    <link rel="stylesheet" href="public/css/app.css">
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl">
@@ -27,12 +34,15 @@
             <img src="public/images/icon.png" width="50" height="30" alt="">
             Coding problems
         </span>
+        <% if(isAdmin){ %>
         <button type="button" ng-click="updateModalFor()" class="btn btn-outline-primary" data-toggle="modal"
             data-target="#problemModal">
             <i class="fas fa-plus"></i>
         </button>
+        <% } %>
     </nav>
-    <div class="container-fluid">
+    <div id="loader"><span></span><span></span><span></span></div>
+    <div class="container-fluid" id="main-body">
         <div class="input-group">
             <select class="col-2 form-control" value="{{filterFields['Difficult level']}}"
                 ng-model="filterFields['Difficult level']">
@@ -43,6 +53,8 @@
         <div class="card" ng-repeat="problem in getFilteredProblems()">
             <div class="card-header d-flex">
                 <h5 class="card-title">{{problem.Name}}</h5>
+                <span class="ml-auto"></span>
+                <% if(isAdmin){ %>
                 <button type="button" ng-click="updateModalFor(problem)" class="ml-auto btn btn-outline-warning"
                     data-toggle="modal" data-target="#problemModal">
                     <i class="fas fa-edit"></i>
@@ -50,9 +62,11 @@
                 <button class="btn btn-outline-danger ml-2" ng-click="removeProblem(problem._id)">
                     <i class="fas fa-trash-alt"></i>
                 </button>
-                <button class="btn btn-outline-secondary ml-2" ng-click="toggleCurrShowCard($index)">
-                    <i class="fa fa-eye-slash" ng-if="currShowCard == $index"></i>
-                    <i class="fa fa-eye" ng-if="currShowCard != $index"></i>
+                <% } %>
+                <button ng-switch="currShowCard==$index" class="btn btn-outline-secondary ml-2"
+                    ng-click="toggleCurrShowCard($index)">
+                    <i ng-switch-when="true" class="fa fa-eye-slash" ng-show="currShowCard == $index"></i>
+                    <i ng-switch-when="false" class="fa fa-eye" ng-show="currShowCard != $index"></i>
                 </button>
             </div>
             <div class="row" ng-show="currShowCard==$index">
@@ -102,7 +116,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary ml-auto mr-3">Save</button>
-                        <button type="button" class="btn btn-secondary mr-auto ml-3" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary mr-auto ml-3"
+                            data-dismiss="modal">Cancel</button>
                     </div>
             </form>
         </div>
