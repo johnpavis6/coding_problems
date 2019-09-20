@@ -17,13 +17,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnpavis6/coding_problems.git"
+    "url": "git+https://github.com/johnpavis6/preparation_kit.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/johnpavis6/coding_problems/issues"
+    "url": "https://github.com/johnpavis6/preparation_kit/issues"
   },
-  "homepage": "https://github.com/johnpavis6/coding_problems#readme"
+  "homepage": "https://github.com/johnpavis6/preparation_kit#readme"
 }
