@@ -24,5 +24,5 @@ const mongo = require('./mongo');
 Promise.all([mongo.connect(), app.listen(port)]).then(msgs => {
     console.log(`App runs on http://localhost:${port}`);
 }).catch(errors => {
-    // throw errors;
+    throw errors;
 });

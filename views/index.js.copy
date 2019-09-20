@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coding Problems</title>
+    <!--Icon-->
+    <link rel="shortcut icon" href="public/images/icon.png" type="image/x-icon">
+    <!--Jquery-->
+    <script src="public/jquery/jquery.min.js"></script>
+    <!--Chosen-->
+    <link rel="stylesheet" href="public/chosen/chosen.min.css">
+    <script src="public/chosen/chosen.jquery.min.js"></script>
+    <!--Fontawesome-->
+    <script src="public/fontawesome/all.js"></script>
+    <!--Angular-->
+    <script src="public/angular/angular.min.js"></script>
+    <!-- <script src="public/angular/angular-animate.min.js"></script> -->
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="public/bootstrap/bootstrap.min.css">
+    <script src="public/bootstrap/bootstrap.min.js"></script>
+    <!--PNotify-->
+    <script type="text/javascript" src="public/pnotify/PNotify.js"></script>
+    <script type="text/javascript" src="public/pnotify/PNotifyButtons.js"></script>
+    <!--custom css-->
+    <link rel="stylesheet" href="public/css/app.css">
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand">
+            <img src="public/images/icon.png" width="50" height="30" alt="">
+            Coding problems
+        </span>
+        <% if(isAdmin){ %>
+        <button type="button" ng-click="updateModalFor()" class="btn btn-outline-primary" data-toggle="modal"
+            data-target="#problemModal">
+            <i class="fas fa-plus"></i>
+        </button>
+        <% } %>
+    </nav>
+    <div id="loader"><span></span><span></span><span></span></div>
+    <div class="container-fluid" id="main-body">
+        <div class="input-group">
+            <select class="col-2 form-control" value="{{filterFields['Difficult level']}}"
+                ng-model="filterFields['Difficult level']">
+                <option ng-repeat="x in formFields[0].options">{{x}}</option>
+            </select>
+            <input class="form-control" type="search" ng-model="filterFields['Name']">
+        </div>
+        <div class="card" ng-repeat="problem in getFilteredProblems()">
+            <div class="card-header d-flex">
+                <h5 class="card-title">{{problem.Name}}</h5>
+                <span class="ml-auto"></span>
+                <% if(isAdmin){ %>
+                <button type="button" ng-click="updateModalFor(problem)" class="ml-auto btn btn-outline-warning"
+                    data-toggle="modal" data-target="#problemModal">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-outline-danger ml-2" ng-click="removeProblem(problem._id)">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <% } %>
+                <button ng-switch="currShowCard==$index" class="btn btn-outline-secondary ml-2"
+                    ng-click="toggleCurrShowCard($index)">
+                    <i ng-switch-when="true" class="fa fa-eye-slash" ng-show="currShowCard == $index"></i>
+                    <i ng-switch-when="false" class="fa fa-eye" ng-show="currShowCard != $index"></i>
+                </button>
+            </div>
+            <div class="row" ng-show="currShowCard==$index">
+                <div class="col-sm">
+                    <div ng-show="problem.Description">
+                        <div class="">Description</div>
+                        <pre class="input-group-text">{{problem.Description.trim()}}</pre>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <pre class="solution">{{problem.Solution.trim()}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="problemModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <form class="modal-content" ng-submit="submitProblem()" autocomplete="off">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="problemModalLabel">
+                        {{modalFor==1?"Create":"Update"}} Problem
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" ng-repeat="field in formFields">
+                        <label for="{{field.name}}">{{field.name}}</label>
+                        <div ng-switch="field.tag" class="position-relative">
+                            <div ng-switch-when="input">
+                                <input id="{{field.name}}" ng-model="payload[field.name]" class="form-control"
+                                    ng-required="field.required" />
+                            </div>
+                            <div ng-switch-when="textarea">
+                                <textarea id="{{field.name}}" ng-model="payload[field.name]" class="form-control"
+                                    ng-required="field.required"></textarea>
+                            </div>
+                            <div ng-switch-when="select">
+                                <select id="{{field.name}}" class="form-control" ng-model="payload[field.name]"
+                                    ng-required="field.required">
+                                    <option ng-repeat="x in field.options" value="{{x}}">{{x}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary ml-auto mr-3">Save</button>
+                        <button type="button" class="btn btn-secondary mr-auto ml-3"
+                            data-dismiss="modal">Cancel</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="public/js/fields.js"></script>
+<script src="public/js/app.js"></script>
+
+</html>
