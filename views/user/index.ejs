@@ -9,18 +9,23 @@
     <!--Icon-->
     <link rel="shortcut icon" href="public/images/icon.png" type="image/x-icon">
     <!--Jquery-->
-    <script src="public/jquery/jquery.min.js"></script>
+    <script src="public/assets/jquery/jquery.min.js"></script>
     <!--Fontawesome-->
-    <script src="public/fontawesome/all.js"></script>
+    <script src="public/assets/fontawesome/all.js"></script>
     <!--Angular-->
-    <script src="public/angular/angular.min.js"></script>
-    <!-- <script src="public/angular/angular-animate.min.js"></script> -->
+    <script src="public/assets/angular/angular.min.js"></script>
+    <!-- <script src="public/assets/angular/angular-animate.min.js"></script> -->
     <!--Bootstrap-->
-    <link rel="stylesheet" href="public/bootstrap/bootstrap.min.css">
-    <script src="public/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="public/assets/bootstrap/bootstrap.min.css">
+    <script src="public/assets/bootstrap/bootstrap.min.js"></script>
+    <!--Popper-->
+    <script src="public/assets/popper/popper.min.js"></script>
+    <!--Bootstrap select-->
+    <link rel="stylesheet" href="public/assets/bootstrap-select/bootstrap-multiselect.css">
+    <script src="public/assets/bootstrap-select/bootstrap-multiselect.js"></script>
     <!--PNotify-->
-    <script type="text/javascript" src="public/pnotify/PNotify.js"></script>
-    <script type="text/javascript" src="public/pnotify/PNotifyButtons.js"></script>
+    <script type="text/javascript" src="public/assets/pnotify/PNotify.js"></script>
+    <script type="text/javascript" src="public/assets/pnotify/PNotifyButtons.js"></script>
     <!--custom css-->
     <link rel="stylesheet" href="public/css/app.css">
 </head>
@@ -35,7 +40,7 @@
     <div id="loader"><span></span><span></span><span></span></div>
     <div class="" id="main-body">
         <div class="input-group">
-            <select class="col-2 form-control" value="{{filterFields['Difficult level']}}"
+            <select class="bootstrap-select col-2 form-control" value="{{filterFields['Difficult level']}}"
                 ng-model="filterFields['Difficult level']">
                 <option ng-repeat="x in formFields[0].options">{{x}}</option>
             </select>

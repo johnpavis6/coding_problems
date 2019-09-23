@@ -36,4 +36,5 @@ app.controller('myCtrl', function ($scope, $http) {
 $(document).ready(function () {
     $("#loader").hide();
     $("#main-body").fadeIn(500);
+    $('.bootstrap-select').multiselect();
 });

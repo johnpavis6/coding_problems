@@ -9,21 +9,21 @@
     <!--Icon-->
     <link rel="shortcut icon" href="public/images/icon.png" type="image/x-icon">
     <!--Jquery-->
-    <script src="public/jquery/jquery.min.js"></script>
+    <script src="public/assets/jquery/jquery.min.js"></script>
     <!--Chosen-->
-    <link rel="stylesheet" href="public/chosen/chosen.min.css">
-    <script src="public/chosen/chosen.jquery.min.js"></script>
+    <link rel="stylesheet" href="public/assets/chosen/chosen.min.css">
+    <script src="public/assets/chosen/chosen.jquery.min.js"></script>
     <!--Fontawesome-->
-    <script src="public/fontawesome/all.js"></script>
+    <script src="public/assets/fontawesome/all.js"></script>
     <!--Angular-->
-    <script src="public/angular/angular.min.js"></script>
-    <!-- <script src="public/angular/angular-animate.min.js"></script> -->
+    <script src="public/assets/angular/angular.min.js"></script>
+    <!-- <script src="public/assets/angular/angular-animate.min.js"></script> -->
     <!--Bootstrap-->
-    <link rel="stylesheet" href="public/bootstrap/bootstrap.min.css">
-    <script src="public/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="public/assets/bootstrap/bootstrap.min.css">
+    <script src="public/assets/bootstrap/bootstrap.min.js"></script>
     <!--PNotify-->
-    <script type="text/javascript" src="public/pnotify/PNotify.js"></script>
-    <script type="text/javascript" src="public/pnotify/PNotifyButtons.js"></script>
+    <script type="text/javascript" src="public/assets/pnotify/PNotify.js"></script>
+    <script type="text/javascript" src="public/assets/pnotify/PNotifyButtons.js"></script>
     <!--custom css-->
     <link rel="stylesheet" href="public/css/app.css">
 </head>
@@ -34,12 +34,10 @@
             <img src="public/images/icon.png" width="50" height="30" alt="">
             Coding problems
         </span>
-        <% if(isAdmin){ %>
         <button type="button" ng-click="updateModalFor()" class="btn btn-outline-primary" data-toggle="modal"
             data-target="#problemModal">
             <i class="fas fa-plus"></i>
         </button>
-        <% } %>
     </nav>
     <div id="loader"><span></span><span></span><span></span></div>
     <div class="container-fluid" id="main-body">
@@ -54,7 +52,6 @@
             <div class="card-header d-flex">
                 <h5 class="card-title">{{problem.Name}}</h5>
                 <span class="ml-auto"></span>
-                <% if(isAdmin){ %>
                 <button type="button" ng-click="updateModalFor(problem)" class="ml-auto btn btn-outline-warning"
                     data-toggle="modal" data-target="#problemModal">
                     <i class="fas fa-edit"></i>
@@ -62,7 +59,6 @@
                 <button class="btn btn-outline-danger ml-2" ng-click="removeProblem(problem._id)">
                     <i class="fas fa-trash-alt"></i>
                 </button>
-                <% } %>
                 <button ng-switch="currShowCard==$index" class="btn btn-outline-secondary ml-2"
                     ng-click="toggleCurrShowCard($index)">
                     <i ng-switch-when="true" class="fa fa-eye-slash" ng-show="currShowCard == $index"></i>

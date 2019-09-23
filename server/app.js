@@ -16,7 +16,10 @@ app.use('/public/', express.static('./public/'));
 app.use('/api/v1/', routes);
 
 app.get('/', (req, res) => {
-    res.render('index', { isAdmin: false });
+    res.render('user/index');
+});
+app.get('/admin', (req, res) => {
+    res.render('admin/index');
 });
 
 const port = args['port'] || 4040;
